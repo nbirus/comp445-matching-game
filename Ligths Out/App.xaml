@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="MatchingGame.App"
+    x:Class="Ligths_Out.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MatchingGame"
+    xmlns:local="using:Ligths_Out"
     RequestedTheme="Light">
 
 </Application>
