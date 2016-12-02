@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="LightsOut___Universal.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LightsOut___Universal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" RequestedTheme="Dark">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Source="Assets/halloween.jpg" Tapped="Image_Tapped" HorizontalAlignment="Center" VerticalAlignment="Center" Height="389" Width="722" />
+        <TextBlock HorizontalAlignment="Center" Height="72" Margin="0,30" TextWrapping="Wrap" TextAlignment="Center"
+                   Text="Lights Out! by Frank McCown" VerticalAlignment="Top" Width="520" FontSize="36"/>
+        <TextBlock HorizontalAlignment="Center" Height="63" Margin="0,100" TextWrapping="Wrap" TextAlignment="Center"
+                   Text="Turn all the lights off to win!" VerticalAlignment="Top" Width="479" FontSize="30"/>
+    </Grid>
+</Page>

@@ -16,17 +16,18 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Ligths_Out
+namespace LightsOut___Universal
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SecondPage : Page
+    public sealed partial class AboutPage : Page
     {
-        public SecondPage()
+        public AboutPage()
         {
             this.InitializeComponent();
         }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var navManager = SystemNavigationManager.GetForCurrentView();
@@ -42,10 +43,16 @@ namespace Ligths_Out
             }
 
             // Register BackRequested handler
-            navManager.BackRequested += SecondPage_BackRequested;
+            navManager.BackRequested += AboutPage_BackRequested;
         }
 
-        private void SecondPage_BackRequested(object sender, BackRequestedEventArgs e)
+        private void AboutPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (this.Frame.CanGoBack)
+                this.Frame.GoBack();
+        }
+
+        private void Image_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (this.Frame.CanGoBack)
                 this.Frame.GoBack();
