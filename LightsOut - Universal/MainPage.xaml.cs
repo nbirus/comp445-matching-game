@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -38,7 +39,7 @@ namespace LightsOut___Universal
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
 
-            //ApplicationData.Current.LocalSettings.Values.Clear();
+            ApplicationData.Current.LocalSettings.Values.Clear();
 
             game = new LightsOutGame();
             CreateGrid();
@@ -108,6 +109,15 @@ namespace LightsOut___Universal
             }
         }
 
+        //private void SetStatus(string status)
+        //{
+        //    lblStatus.Text = status;
+        //    lblStatus.Invalidate();
+        //    lblStatus.Update();
+        //    lblStatus.Refresh();
+        //    Application.DoEvents();
+        //}
+
         private async void paintCanvas_Tapped(object sender, TappedRoutedEventArgs e)
         {
             int rectSize = (int)paintCanvas.Width / game.GridSize;
@@ -122,9 +132,19 @@ namespace LightsOut___Universal
             // Redraw the board
             DrawGrid();
 
+
+
+            //SetStatus();
+
+            game.checkMove();
+
+            DrawGrid();
+
+
+
             if (game.IsGameOver())
             {
-                MessageDialog msgDialog = new MessageDialog("Congratulations!  You've won!", "Lights Out!");
+                MessageDialog msgDialog = new MessageDialog("Congratulations!  You've won!", "Matching Game");
 
                 // Add an OK button
                 msgDialog.Commands.Add(new UICommand("OK"));

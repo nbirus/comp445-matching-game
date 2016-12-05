@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace LightsOut___Universal
@@ -13,6 +14,14 @@ namespace LightsOut___Universal
 
         public const int MaxGridSize = 6;
         public const int MinGridSize = 4;
+
+        public int lastMoveR = -1;
+        public int lastMoveC = -1;
+
+        public int currentMoveR = -1;
+        public int currentMoveC = -1;
+
+        public int moveNum = 1;
 
 
 
@@ -50,8 +59,6 @@ namespace LightsOut___Universal
         {
             rand = new Random();
             GridSize = MinGridSize;
-
-
         }
 
         public bool GetGridValue(int row, int col)
@@ -104,11 +111,74 @@ namespace LightsOut___Universal
                     + (gridSize - 1));
             }
 
-            // Invert selected box and all surrounding boxes
-            if (row >= 0 && row < gridSize && col >= 0 && col < gridSize)
+
+            if (!grid[row, col])
             {
                 grid[row, col] = !grid[row, col];
+
+                currentMoveR = row;
+                currentMoveC = col;
             }
+        }
+
+        public void checkMove()
+        {
+            Stopwatch sw = new Stopwatch(); // sw cotructor
+            sw.Start(); // starts the stopwatch
+            for (int i = 0; ; i++)
+            {
+                if (i % 100000 == 0) // if in 100000th iteration (could be any other large number
+                                     // depending on how often you want the time to be checked) 
+                {
+                    sw.Stop(); // stop the time measurement
+                    if (sw.ElapsedMilliseconds > 500) // check if desired period of time has elapsed
+                    {
+                        if (moveNum == 1)
+                        {
+                            lastMoveR = currentMoveR;
+                            lastMoveC = currentMoveC;
+                            moveNum++;
+                        }
+                        else
+                        {
+                            moveNum = 1;
+                            // check to see if match
+                            if (!IsMatch(currentMoveR, currentMoveC))
+                            {
+                                // else flip back over
+                                grid[currentMoveR, currentMoveC] = false;
+                                grid[lastMoveR, lastMoveC] = false;
+
+                                lastMoveR = -1;
+                                lastMoveC = -1;
+                            }
+                            else
+                            {
+                                lastMoveR = -1;
+                                lastMoveC = -1;
+                            }
+
+                        }
+                        break; // if more than 5000 milliseconds have passed, stop looping and return
+                               // to the existing code
+                    }
+                    else
+                    {
+                        sw.Start(); // if less than 5000 milliseconds have elapsed, continue looping
+                                    // and resume time measurement
+                    }
+                }
+            }
+
+           
+        }
+
+        public bool IsMatch(int r, int c)
+        {
+            if (object_grid[r, c] == object_grid[lastMoveR, lastMoveC])
+                return true;
+            else
+                return false; 
         }
 
         public bool IsGameOver()
